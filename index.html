@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website Discovery Questionnaire</title>
+<title>Quick Website Brief</title>
 <style>
   :root {
     --bone: #EFEAE0;
@@ -283,377 +283,153 @@
 
 <div class="wrap">
   <header class="masthead">
-    <p class="eyebrow">Client discovery brief</p>
-    <h1>Let's get your website right from the start</h1>
-    <p class="lede">This should take about <strong>five minutes</strong>. There's no login and nothing saves automatically, so it's best to finish it in one sitting. If you're unsure about any section, feel free to leave it blank. At the end you'll download your answers as a file (or copy them) to send back.</p>
+    <p class="eyebrow">Quick brief</p>
+    <h1>A few quick questions before I build your demo</h1>
+    <p class="lede">This takes about <strong>two minutes</strong> and every question is optional — answer what you know and skip the rest. It gives me enough to put together a real demo of your website so you can see it rather than imagine it. Nothing saves automatically, so it's best done in one sitting. At the end you'll download or copy your answers to send back.</p>
     <hr class="masthead-rule">
   </header>
 
   <form id="questionnaire">
 
-    <section class="q-section" data-title="1. About you &amp; your business">
+    <section class="q-section" data-title="1. Your business">
       <hr class="section-rule">
       <p class="eyebrow">Section 01</p>
-      <h2>About you &amp; your business</h2>
-      <p class="section-note">The basics — who you are and who you help.</p>
+      <h2>Your business</h2>
+      <p class="section-note">The basics — who you are and who you serve.</p>
 
       <div class="field" data-question="Business or brand name">
         <label for="s1-bizname">Business or brand name</label>
-        <input type="text" id="s1-bizname" placeholder="e.g. Riverside Nutrition Co.">
+        <input type="text" id="s1-bizname">
       </div>
 
-      <div class="field" data-question="Your name and title">
-        <label for="s1-name">Your name and title</label>
-        <input type="text" id="s1-name" placeholder="e.g. Jamie Rivera, Registered Dietitian">
+      <div class="field" data-question="What you do, in one sentence">
+        <label for="s1-what">What do you do, in one sentence?
+          <span class="field-hint">How you'd explain it to someone you just met.</span>
+        </label>
+        <input type="text" id="s1-what" placeholder="e.g. We're a family-run plumbing firm covering North Leeds.">
       </div>
 
-      <div class="field" data-question="What do you do for your clients?">
-        <label for="s1-what">In a sentence or two, what do you do for your clients?</label>
-        <textarea id="s1-what" placeholder="e.g. I help new parents rebuild healthy eating habits through 1-on-1 coaching."></textarea>
+      <div class="field" data-question="Who your customers are">
+        <label for="s1-who">Who are your customers?
+          <span class="field-hint">The people you most want more of.</span>
+        </label>
+        <input type="text" id="s1-who" placeholder="e.g. Homeowners and small landlords">
       </div>
 
-      <div class="field" data-question="Who is your ideal client?">
-        <label for="s1-audience">Who is your ideal client?</label>
-        <textarea id="s1-audience" placeholder="Age range, what they're struggling with, how they usually find you"></textarea>
+      <div class="field" data-question="Where you operate">
+        <label for="s1-where">Where do you operate?
+          <span class="field-hint">A town or radius, nationwide, or online only.</span>
+        </label>
+        <input type="text" id="s1-where" placeholder="e.g. Leeds and 20 miles around it">
       </div>
 
-      <div class="field" data-question="Existing website">
-        <fieldset>
-          <legend>Do you already have a website?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s1-existing" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s1-existing" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s1-existing-url" placeholder="If yes, what's the URL?">
-        </fieldset>
+      <div class="field" data-question="Top services or products">
+        <label for="s1-services">Your top three services or products
+          <span class="field-hint">Just the names is fine — these become the main sections of the demo.</span>
+        </label>
+        <textarea id="s1-services" placeholder="1.&#10;2.&#10;3."></textarea>
       </div>
     </section>
 
-    <section class="q-section" data-title="2. Goals for this website">
+    <section class="q-section" data-title="2. What the site needs to do">
       <hr class="section-rule">
       <p class="eyebrow">Section 02</p>
-      <h2>Goals for this website</h2>
-      <p class="section-note">What should this site actually accomplish for you?</p>
+      <h2>What the site needs to do</h2>
+      <p class="section-note">So the demo is built around the result you actually want.</p>
 
-      <div class="field" data-question="What should this website do for you?">
+      <div class="field" data-question="What visitors should be able to do">
         <fieldset>
-          <legend>What do you want this website to do for you? (pick all that apply)</legend>
+          <legend>What do you want visitors to be able to do? (pick all that apply)
+            <span class="field-hint">If one of these matters more than the rest, say which in the box below.</span>
+          </legend>
           <div class="options">
-            <label class="option"><input type="checkbox" name="s2-goals" value="Bring in new coaching or consulting clients"> Bring in new coaching or consulting clients</label>
-            <label class="option"><input type="checkbox" name="s2-goals" value="Let people book appointments or consultations online"> Let people book appointments or consultations online</label>
-            <label class="option"><input type="checkbox" name="s2-goals" value="Sell products (supplements, meal plans, cookbooks, merch)"> Sell products (supplements, meal plans, cookbooks, merch)</label>
-            <label class="option"><input type="checkbox" name="s2-goals" value="Build my email list"> Build my email list</label>
-            <label class="option"><input type="checkbox" name="s2-goals" value="Share free content (recipes, articles, videos)"> Share free content (recipes, articles, videos)</label>
-            <label class="option"><input type="checkbox" name="s2-goals" value="Build credibility as a professional"> Build credibility as a professional</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Call or message me"> Call or message me</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Book an appointment"> Book an appointment</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Request a quote"> Request a quote</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Buy something online"> Buy something online</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Join my mailing list"> Join my mailing list</label>
+            <label class="option"><input type="checkbox" name="s2-action" value="Find information and trust us"> Find information and come away trusting us</label>
           </div>
-          <input type="text" class="other-input" id="s2-goals-other" placeholder="Other — please specify">
+          <input type="text" class="other-input" id="s2-action-main" placeholder="Which one matters most?">
         </fieldset>
       </div>
 
+
     </section>
 
-    <section class="q-section" data-title="3. Services &amp; offerings">
+    <section class="q-section" data-title="3. What you already have">
       <hr class="section-rule">
       <p class="eyebrow">Section 03</p>
-      <h2>Services &amp; offerings</h2>
-      <p class="section-note">This tells me which features the site actually needs — booking, a shop, gated content, or none of that.</p>
+      <h2>What you already have</h2>
+      <p class="section-note">Anything here means the demo uses your real words and photos instead of placeholders.</p>
 
-      <div class="field" data-question="Sells physical products?">
-        <fieldset>
-          <legend>Do you sell physical products (supplements, cookbooks, merchandise)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s3-physical" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-physical" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s3-physical-detail" placeholder="If yes: what, roughly how many items, does it need shipping?">
-        </fieldset>
+      <div class="field" data-question="Current website and social profiles">
+        <label for="s3-links">Current website and social profiles
+          <span class="field-hint">Paste any links you have — website, Facebook, Instagram, LinkedIn. "None" is a perfectly good answer.</span>
+        </label>
+        <textarea id="s3-links"></textarea>
       </div>
 
-      <div class="field" data-question="Sells digital products?">
-        <fieldset>
-          <legend>Do you sell digital products (meal plans, PDFs, courses, eBooks)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s3-digital" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-digital" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s3-digital-detail" placeholder="If yes: what kind, and roughly how many?">
-        </fieldset>
+      <div class="field" data-question="Google Business Profile">
+        <label for="s3-google">Google Business Profile
+          <span class="field-hint">If you show up on Google Maps, paste the link — it lets me pull your reviews, opening hours and photos straight into the demo.</span>
+        </label>
+        <input type="url" id="s3-google" placeholder="https://">
       </div>
 
-      <div class="field" data-question="Paid membership or recurring program?">
+      <div class="field" data-question="Logo and brand colours">
         <fieldset>
-          <legend>Do you offer a paid membership, subscription, or recurring program?</legend>
+          <legend>Do you have a logo and set brand colours?</legend>
           <div class="options">
-            <label class="option"><input type="radio" name="s3-membership" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-membership" value="No"> No</label>
+            <label class="option"><input type="radio" name="s3-brand" value="Logo and colours"> Both a logo and colours</label>
+            <label class="option"><input type="radio" name="s3-brand" value="Logo only"> A logo, but no set colours</label>
+            <label class="option"><input type="radio" name="s3-brand" value="Neither yet"> Neither yet</label>
           </div>
-          <input type="text" class="other-input" id="s3-membership-detail" placeholder="If yes: briefly describe it">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Publishing content regularly?">
-        <fieldset>
-          <legend>Will you be publishing content regularly (recipes, articles, videos)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s3-content" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-content" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s3-content-detail" placeholder="If yes: roughly how often?">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Need a private client login area?">
-        <fieldset>
-          <legend>Do clients need to log in to see anything private (their plan, progress, files)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s3-login" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-login" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s3-login-detail" placeholder="If yes: what should they be able to see or do?">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Email newsletter signup?">
-        <fieldset>
-          <legend>Do you want an email newsletter signup on the site?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s3-newsletter" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s3-newsletter" value="No"> No</label>
-          </div>
+          <input type="text" class="other-input" id="s3-colours" placeholder="If you have colours, name them here — e.g. navy and gold">
         </fieldset>
       </div>
     </section>
 
-    <section class="q-section" data-title="4. Content you have">
+    <section class="q-section" data-title="4. Look &amp; feel">
       <hr class="section-rule">
       <p class="eyebrow">Section 04</p>
-      <h2>Content you have</h2>
-      <p class="section-note">What already exists, and what we'll need to create together.</p>
+      <h2>Look &amp; feel</h2>
+      <p class="section-note">A rough steer is plenty — this is what we'll refine together once you've seen the demo.</p>
 
-      <div class="field" data-question="Which pages do you think you'll need?">
-        <fieldset>
-          <legend>Which pages do you think you'll need? (pick all that apply)</legend>
-          <div class="options">
-            <label class="option"><input type="checkbox" name="s4-pages" value="Home"> Home</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="About"> About</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Services / Programs"> Services / Programs</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Pricing"> Pricing</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Blog / Recipes"> Blog / Recipes</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Shop"> Shop</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Testimonials"> Testimonials</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="FAQ"> FAQ</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Contact"> Contact</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Book a call"> Book a call</label>
-            <label class="option"><input type="checkbox" name="s4-pages" value="Not sure yet"> Not sure yet</label>
-          </div>
-          <input type="text" class="other-input" id="s4-pages-other" placeholder="Other — please specify">
-        </fieldset>
+      <div class="field" data-question="Websites you like the look of">
+        <label for="s4-likes">Any websites you like the look of?
+          <span class="field-hint">One to three links. They can be from any industry, including your competitors.</span>
+        </label>
+        <textarea id="s4-likes"></textarea>
       </div>
 
-      <div class="field" data-question="Is copy ready, or do you need help writing it?">
+      <div class="field" data-question="How the site should feel">
         <fieldset>
-          <legend>Do you already have written copy for these pages, or would you like help writing it?</legend>
+          <legend>How should the site feel? (pick any that fit)</legend>
           <div class="options">
-            <label class="option"><input type="radio" name="s4-copy" value="I have it ready"> I have it ready</label>
-            <label class="option"><input type="radio" name="s4-copy" value="I need help writing it"> I need help writing it</label>
-            <label class="option"><input type="radio" name="s4-copy" value="A bit of both"> A bit of both</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Clean and professional"> Clean and professional</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Warm and friendly"> Warm and friendly</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Bold and energetic"> Bold and energetic</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Calm and minimal"> Calm and minimal</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Premium and polished"> Premium and polished</label>
+            <label class="option"><input type="checkbox" name="s4-feel" value="Fun and playful"> Fun and playful</label>
           </div>
         </fieldset>
       </div>
 
-      <div class="field" data-question="Professional photos and logo ready?">
-        <fieldset>
-          <legend>Do you have professional photos and a logo ready to use?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s4-assets" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s4-assets" value="No"> No</label>
-            <label class="option"><input type="radio" name="s4-assets" value="Some of it"> Some of it</label>
-          </div>
-          <input type="text" class="other-input" id="s4-assets-detail" placeholder="Any notes on what you have or still need">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Testimonials or success stories to feature?">
-        <fieldset>
-          <legend>Do you have testimonials, reviews, or success stories to feature?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s4-testimonials" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s4-testimonials" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s4-testimonials-detail" placeholder="If yes: roughly how many?">
-        </fieldset>
-      </div>
-    </section>
-
-    <section class="q-section" data-title="5. Design &amp; branding">
-      <hr class="section-rule">
-      <p class="eyebrow">Section 05</p>
-      <h2>Design &amp; branding</h2>
-      <p class="section-note">Getting a feel for the look, tone, and any existing brand you already have.</p>
-
-      <div class="field" data-question="Existing brand guidelines?">
-        <fieldset>
-          <legend>Do you have existing brand guidelines (colors, fonts, a logo file)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s5-brand" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s5-brand" value="No"> No</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="How should the site feel?">
-        <fieldset>
-          <legend>How do you want the site to feel? (pick all that apply)</legend>
-          <div class="options">
-            <label class="option"><input type="checkbox" name="s5-feel" value="Clean and clinical"> Clean and clinical</label>
-            <label class="option"><input type="checkbox" name="s5-feel" value="Warm and approachable"> Warm and approachable</label>
-            <label class="option"><input type="checkbox" name="s5-feel" value="Bright and energetic"> Bright and energetic</label>
-            <label class="option"><input type="checkbox" name="s5-feel" value="Calm and minimal"> Calm and minimal</label>
-            <label class="option"><input type="checkbox" name="s5-feel" value="Premium and polished"> Premium and polished</label>
-          </div>
-          <input type="text" class="other-input" id="s5-feel-other" placeholder="Other — please specify">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Websites you love the look of">
-        <label for="s5-inspiration">Any websites you love the look of? Share a link or two</label>
-        <textarea id="s5-inspiration"></textarea>
-      </div>
-
-      <div class="field" data-question="Styles or colors to avoid">
-        <label for="s5-avoid">Any styles, colors, or layouts you'd like to avoid?</label>
-        <textarea id="s5-avoid"></textarea>
-      </div>
-    </section>
-
-    <section class="q-section" data-title="6. Technical details">
-      <hr class="section-rule">
-      <p class="eyebrow">Section 06</p>
-      <h2>Technical details</h2>
-      <p class="section-note">The practical groundwork — domain, hosting, and any tools already in use.</p>
-
-      <div class="field" data-question="Own a domain name?">
-        <fieldset>
-          <legend>Do you already own a domain name?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s6-domain" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s6-domain" value="No"> No</label>
-          </div>
-          <input type="text" class="other-input" id="s6-domain-detail" placeholder="If yes: what is it?">
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Hosting status">
-        <fieldset>
-          <legend>Do you have hosting in place, or will you need that set up?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s6-hosting" value="I have hosting"> I have hosting</label>
-            <label class="option"><input type="radio" name="s6-hosting" value="I need hosting set up"> I need hosting set up</label>
-            <label class="option"><input type="radio" name="s6-hosting" value="Not sure"> Not sure</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Want to edit content yourself after launch?">
-        <fieldset>
-          <legend>After launch, do you want to be able to edit content yourself (text, photos, blog posts)?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s6-selfedit" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s6-selfedit" value="No, I'd rather you handle updates"> No, I'd rather you handle updates</label>
-            <label class="option"><input type="radio" name="s6-selfedit" value="Some of it"> Some of it</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Existing tools the site should connect to">
-        <fieldset>
-          <legend>Any tools you already use that the site should connect to?</legend>
-          <div class="options">
-            <label class="option"><input type="checkbox" name="s6-tools" value="Calendly or similar booking tool"> Calendly or similar booking tool</label>
-            <label class="option"><input type="checkbox" name="s6-tools" value="Mailchimp or similar email platform"> Mailchimp or similar email platform</label>
-            <label class="option"><input type="checkbox" name="s6-tools" value="Stripe or PayPal"> Stripe or PayPal</label>
-            <label class="option"><input type="checkbox" name="s6-tools" value="Instagram feed"> Instagram feed</label>
-            <label class="option"><input type="checkbox" name="s6-tools" value="Google Reviews"> Google Reviews</label>
-            <label class="option"><input type="checkbox" name="s6-tools" value="None yet"> None yet</label>
-          </div>
-          <input type="text" class="other-input" id="s6-tools-other" placeholder="Other — please specify">
-        </fieldset>
-      </div>
-    </section>
-
-    <section class="q-section" data-title="7. Trust &amp; compliance">
-      <hr class="section-rule">
-      <p class="eyebrow">Section 07</p>
-      <h2>Trust &amp; compliance</h2>
-      <p class="section-note">A few things specific to nutrition-related sites that are easy to forget until launch day.</p>
-
-      <div class="field" data-question="Need a medical or nutrition disclaimer?">
-        <fieldset>
-          <legend>Should the site include a medical or nutrition disclaimer?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s7-disclaimer" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s7-disclaimer" value="No"> No</label>
-            <label class="option"><input type="radio" name="s7-disclaimer" value="Not sure"> Not sure</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Need a privacy policy and terms of service?">
-        <fieldset>
-          <legend>Do you need a privacy policy and terms of service?</legend>
-          <div class="options">
-            <label class="option"><input type="radio" name="s7-legal" value="Yes"> Yes</label>
-            <label class="option"><input type="radio" name="s7-legal" value="No"> No</label>
-            <label class="option"><input type="radio" name="s7-legal" value="Not sure"> Not sure</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="field" data-question="Certifications, licenses, or affiliations to display prominently">
-        <label for="s7-creds-display">Are there certifications, licenses, or affiliations that must be displayed prominently — and where are you licensed to practice?</label>
-        <textarea id="s7-creds-display"></textarea>
-      </div>
-    </section>
-
-    <section class="q-section" data-title="8. Budget &amp; timeline">
-      <hr class="section-rule">
-      <p class="eyebrow">Section 08</p>
-      <h2>Budget &amp; timeline</h2>
-      <p class="section-note">Helps me scope something realistic for where you are right now.</p>
-
-      <div class="field" data-question="Budget range">
-        <label for="s8-budget">What's your budget range for this project?</label>
-        <input type="text" id="s8-budget">
-      </div>
-
-      <div class="field" data-question="Target launch date or event">
-        <label for="s8-date">Is there a date you'd like this live by? Tied to any event?</label>
-        <input type="text" id="s8-date">
-      </div>
-
-      <div class="field" data-question="Other time-sensitive details">
-        <label for="s8-other-dates">Anything else time-sensitive I should know?</label>
-        <textarea id="s8-other-dates"></textarea>
-      </div>
-    </section>
-
-    <section class="q-section" data-title="9. Anything else">
-      <hr class="section-rule">
-      <p class="eyebrow">Section 09</p>
-      <h2>Anything else</h2>
-      <p class="section-note">Anything about your business or your vision for this site that the questions above didn't cover.</p>
-
-      <div class="field" data-question="Anything else I should know?">
-        <label for="s9-other">Tell me anything else that would help</label>
-        <textarea id="s9-other" style="min-height:6rem;"></textarea>
+      <div class="field" data-question="Anything else">
+        <label for="s4-other">Anything else I should know?
+          <span class="field-hint">Something that makes you different, a pet hate, a must-have. Optional.</span>
+        </label>
+        <textarea id="s4-other"></textarea>
       </div>
     </section>
 
     <section class="review">
       <hr class="section-rule" style="background:var(--beet);">
       <p class="eyebrow" style="color:var(--turmeric);">Last step</p>
-      <h2 style="font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-weight:500; font-size:clamp(1.3rem,2.6vw,1.55rem); margin:0 0 0.5rem;">Review &amp; send your answers</h2>
-      <p class="section-note">Compile everything into a single record, then download it and email it back.</p>
+      <h2 style="font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-weight:500; font-size:clamp(1.3rem,2.6vw,1.55rem); margin:0 0 0.5rem;">Send your answers back</h2>
+      <p class="section-note">Compile everything into a single record, then download it or copy it into an email.</p>
 
       <div class="actions">
         <button type="button" id="compile-btn">Compile my answers</button>
@@ -679,7 +455,7 @@
   </form>
 
   <footer>
-    Website discovery questionnaire — prepared for our project together.
+    Quick website brief — so I can build you something real to look at.
   </footer>
 </div>
 
@@ -715,7 +491,7 @@
       var bizName = document.getElementById('s1-bizname').value.trim() || '(business name not given)';
       var today = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
       var lines = [];
-      lines.push('WEBSITE DISCOVERY QUESTIONNAIRE');
+      lines.push('WEBSITE DEMO BRIEF');
       lines.push('Completed ' + today + ' — ' + bizName);
       lines.push('');
 
@@ -749,8 +525,8 @@
       reviewOutput.hidden = false;
 
       var mailtoLink = document.getElementById('mailto-link');
-      var subject = encodeURIComponent('Website questionnaire — ' + lastCompiled.bizName);
-      var body = encodeURIComponent('Hi,\n\nI\'ve filled out the website questionnaire — my answers are attached (or pasted below).\n\n');
+      var subject = encodeURIComponent('Demo brief — ' + lastCompiled.bizName);
+      var body = encodeURIComponent('Hi,\n\nI\'ve filled out the quick brief for my demo site — my answers are attached (or pasted below).\n\n');
       mailtoLink.href = 'mailto:mrchreesa@gmail.com?subject=' + subject + '&body=' + body;
 
       reviewOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -760,7 +536,7 @@
     document.getElementById('download-btn').addEventListener('click', function () {
       if (!lastCompiled) return;
       try {
-        var filename = 'website-questionnaire-' + slugify(lastCompiled.bizName) + '.txt';
+        var filename = 'demo-brief-' + slugify(lastCompiled.bizName) + '.txt';
         var blob = new Blob([lastCompiled.text], { type: 'text/plain;charset=utf-8' });
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');

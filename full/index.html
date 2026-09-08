@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Discovery Questionnaire</title>
+<style>
+  :root {
+    --bone: #EFEAE0;
+    --bone-raised: #E4DCC8;
+    --ink: #221D16;
+    --ink-soft: #5B5347;
+    --rule: #C9BFA8;
+    --turmeric: #A9691F;
+    --beet: #7A2E42;
+    --focus: #A9691F;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bone: #1C1812;
+      --bone-raised: #262019;
+      --ink: #EDE6D8;
+      --ink-soft: #A89C87;
+      --rule: #4A4234;
+      --turmeric: #E3A24A;
+      --beet: #C06C85;
+      --focus: #E3A24A;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 6rem;
+  }
+
+  header.masthead {
+    padding-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--beet);
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 0.75rem;
+  }
+
+  .lede {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    max-width: 34rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .lede strong { color: var(--ink); }
+
+  .masthead-rule {
+    height: 3px;
+    background: var(--ink);
+    margin-top: 1.6rem;
+    border: none;
+  }
+
+  .q-section {
+    margin-top: 3rem;
+  }
+
+  .section-rule {
+    height: 2px;
+    background: var(--ink);
+    border: none;
+    margin: 0 0 0.9rem;
+  }
+
+  .q-section .eyebrow { margin-bottom: 0.4rem; }
+
+  .q-section h2 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.3rem, 2.6vw, 1.55rem);
+    margin: 0 0 0.5rem;
+    text-wrap: balance;
+  }
+
+  .section-note {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    margin: 0 0 1.6rem;
+    max-width: 36rem;
+  }
+
+  .field {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .field:last-child { border-bottom: none; }
+
+  .field > label,
+  .field > fieldset > legend {
+    display: block;
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 0 0 0.55rem;
+    padding: 0;
+  }
+
+  .field-hint {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.15rem;
+  }
+
+  fieldset { border: none; margin: 0; padding: 0; }
+
+  input[type="text"],
+  input[type="url"],
+  textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    color: var(--ink);
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.5rem 0.1rem;
+    font-family: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 4.2rem;
+    line-height: 1.5;
+  }
+
+  input[type="text"]:focus,
+  input[type="url"]:focus,
+  textarea:focus {
+    outline: none;
+    border-bottom: 2px solid var(--focus);
+    padding-bottom: calc(0.5rem - 1px);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--ink-soft);
+    opacity: 0.65;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .option {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-size: 0.98rem;
+  }
+
+  input[type="radio"], input[type="checkbox"] {
+    accent-color: var(--turmeric);
+    width: 1.05em;
+    height: 1.05em;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  input[type="radio"]:focus-visible,
+  input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .other-input {
+    margin-top: 0.5rem;
+    max-width: 26rem;
+  }
+
+  .review {
+    margin-top: 3.5rem;
+    padding-top: 1.6rem;
+  }
+
+  button {
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--ink);
+    color: var(--bone);
+    border: none;
+    padding: 0.75rem 1.4rem;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+  }
+
+  button:hover { background: var(--turmeric); }
+  button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  button.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  button.secondary:hover {
+    background: var(--bone-raised);
+    color: var(--ink);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  #review-output textarea {
+    font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    min-height: 22rem;
+    border: 1px solid var(--rule);
+    padding: 1rem;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .status-msg {
+    font-size: 0.88rem;
+    color: var(--beet);
+    min-height: 1.2rem;
+    margin: 0.3rem 0 0;
+  }
+
+  .hint-box {
+    background: var(--bone-raised);
+    border-left: 3px solid var(--turmeric);
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    color: var(--ink);
+    margin-top: 1.2rem;
+  }
+  .hint-box strong { color: var(--beet); }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Client discovery brief</p>
+    <h1>Let's get your website right from the start</h1>
+    <p class="lede">This should take about <strong>five minutes</strong>. There's no login and nothing saves automatically, so it's best to finish it in one sitting. If you're unsure about any section, feel free to leave it blank. At the end you'll download your answers as a file (or copy them) to send back.</p>
+    <hr class="masthead-rule">
+  </header>
+
+  <form id="questionnaire">
+
+    <section class="q-section" data-title="1. About you &amp; your business">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 01</p>
+      <h2>About you &amp; your business</h2>
+      <p class="section-note">The basics — who you are and who you help.</p>
+
+      <div class="field" data-question="Business or brand name">
+        <label for="s1-bizname">Business or brand name</label>
+        <input type="text" id="s1-bizname" placeholder="e.g. Riverside Nutrition Co.">
+      </div>
+
+      <div class="field" data-question="Your name and title">
+        <label for="s1-name">Your name and title</label>
+        <input type="text" id="s1-name" placeholder="e.g. Jamie Rivera, Registered Dietitian">
+      </div>
+
+      <div class="field" data-question="What do you do for your clients?">
+        <label for="s1-what">In a sentence or two, what do you do for your clients?</label>
+        <textarea id="s1-what" placeholder="e.g. I help new parents rebuild healthy eating habits through 1-on-1 coaching."></textarea>
+      </div>
+
+      <div class="field" data-question="Who is your ideal client?">
+        <label for="s1-audience">Who is your ideal client?</label>
+        <textarea id="s1-audience" placeholder="Age range, what they're struggling with, how they usually find you"></textarea>
+      </div>
+
+      <div class="field" data-question="Existing website">
+        <fieldset>
+          <legend>Do you already have a website?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s1-existing" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s1-existing" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s1-existing-url" placeholder="If yes, what's the URL?">
+        </fieldset>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="2. Goals for this website">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 02</p>
+      <h2>Goals for this website</h2>
+      <p class="section-note">What should this site actually accomplish for you?</p>
+
+      <div class="field" data-question="What should this website do for you?">
+        <fieldset>
+          <legend>What do you want this website to do for you? (pick all that apply)</legend>
+          <div class="options">
+            <label class="option"><input type="checkbox" name="s2-goals" value="Bring in new coaching or consulting clients"> Bring in new coaching or consulting clients</label>
+            <label class="option"><input type="checkbox" name="s2-goals" value="Let people book appointments or consultations online"> Let people book appointments or consultations online</label>
+            <label class="option"><input type="checkbox" name="s2-goals" value="Sell products (supplements, meal plans, cookbooks, merch)"> Sell products (supplements, meal plans, cookbooks, merch)</label>
+            <label class="option"><input type="checkbox" name="s2-goals" value="Build my email list"> Build my email list</label>
+            <label class="option"><input type="checkbox" name="s2-goals" value="Share free content (recipes, articles, videos)"> Share free content (recipes, articles, videos)</label>
+            <label class="option"><input type="checkbox" name="s2-goals" value="Build credibility as a professional"> Build credibility as a professional</label>
+          </div>
+          <input type="text" class="other-input" id="s2-goals-other" placeholder="Other — please specify">
+        </fieldset>
+      </div>
+
+    </section>
+
+    <section class="q-section" data-title="3. Services &amp; offerings">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 03</p>
+      <h2>Services &amp; offerings</h2>
+      <p class="section-note">This tells me which features the site actually needs — booking, a shop, gated content, or none of that.</p>
+
+      <div class="field" data-question="Sells physical products?">
+        <fieldset>
+          <legend>Do you sell physical products (supplements, cookbooks, merchandise)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-physical" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-physical" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s3-physical-detail" placeholder="If yes: what, roughly how many items, does it need shipping?">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Sells digital products?">
+        <fieldset>
+          <legend>Do you sell digital products (meal plans, PDFs, courses, eBooks)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-digital" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-digital" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s3-digital-detail" placeholder="If yes: what kind, and roughly how many?">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Paid membership or recurring program?">
+        <fieldset>
+          <legend>Do you offer a paid membership, subscription, or recurring program?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-membership" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-membership" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s3-membership-detail" placeholder="If yes: briefly describe it">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Publishing content regularly?">
+        <fieldset>
+          <legend>Will you be publishing content regularly (recipes, articles, videos)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-content" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-content" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s3-content-detail" placeholder="If yes: roughly how often?">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Need a private client login area?">
+        <fieldset>
+          <legend>Do clients need to log in to see anything private (their plan, progress, files)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-login" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-login" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s3-login-detail" placeholder="If yes: what should they be able to see or do?">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Email newsletter signup?">
+        <fieldset>
+          <legend>Do you want an email newsletter signup on the site?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s3-newsletter" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s3-newsletter" value="No"> No</label>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="4. Content you have">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 04</p>
+      <h2>Content you have</h2>
+      <p class="section-note">What already exists, and what we'll need to create together.</p>
+
+      <div class="field" data-question="Which pages do you think you'll need?">
+        <fieldset>
+          <legend>Which pages do you think you'll need? (pick all that apply)</legend>
+          <div class="options">
+            <label class="option"><input type="checkbox" name="s4-pages" value="Home"> Home</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="About"> About</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Services / Programs"> Services / Programs</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Pricing"> Pricing</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Blog / Recipes"> Blog / Recipes</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Shop"> Shop</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Testimonials"> Testimonials</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="FAQ"> FAQ</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Contact"> Contact</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Book a call"> Book a call</label>
+            <label class="option"><input type="checkbox" name="s4-pages" value="Not sure yet"> Not sure yet</label>
+          </div>
+          <input type="text" class="other-input" id="s4-pages-other" placeholder="Other — please specify">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Is copy ready, or do you need help writing it?">
+        <fieldset>
+          <legend>Do you already have written copy for these pages, or would you like help writing it?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s4-copy" value="I have it ready"> I have it ready</label>
+            <label class="option"><input type="radio" name="s4-copy" value="I need help writing it"> I need help writing it</label>
+            <label class="option"><input type="radio" name="s4-copy" value="A bit of both"> A bit of both</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Professional photos and logo ready?">
+        <fieldset>
+          <legend>Do you have professional photos and a logo ready to use?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s4-assets" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s4-assets" value="No"> No</label>
+            <label class="option"><input type="radio" name="s4-assets" value="Some of it"> Some of it</label>
+          </div>
+          <input type="text" class="other-input" id="s4-assets-detail" placeholder="Any notes on what you have or still need">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Testimonials or success stories to feature?">
+        <fieldset>
+          <legend>Do you have testimonials, reviews, or success stories to feature?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s4-testimonials" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s4-testimonials" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s4-testimonials-detail" placeholder="If yes: roughly how many?">
+        </fieldset>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="5. Design &amp; branding">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 05</p>
+      <h2>Design &amp; branding</h2>
+      <p class="section-note">Getting a feel for the look, tone, and any existing brand you already have.</p>
+
+      <div class="field" data-question="Existing brand guidelines?">
+        <fieldset>
+          <legend>Do you have existing brand guidelines (colors, fonts, a logo file)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s5-brand" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s5-brand" value="No"> No</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="How should the site feel?">
+        <fieldset>
+          <legend>How do you want the site to feel? (pick all that apply)</legend>
+          <div class="options">
+            <label class="option"><input type="checkbox" name="s5-feel" value="Clean and clinical"> Clean and clinical</label>
+            <label class="option"><input type="checkbox" name="s5-feel" value="Warm and approachable"> Warm and approachable</label>
+            <label class="option"><input type="checkbox" name="s5-feel" value="Bright and energetic"> Bright and energetic</label>
+            <label class="option"><input type="checkbox" name="s5-feel" value="Calm and minimal"> Calm and minimal</label>
+            <label class="option"><input type="checkbox" name="s5-feel" value="Premium and polished"> Premium and polished</label>
+          </div>
+          <input type="text" class="other-input" id="s5-feel-other" placeholder="Other — please specify">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Websites you love the look of">
+        <label for="s5-inspiration">Any websites you love the look of? Share a link or two</label>
+        <textarea id="s5-inspiration"></textarea>
+      </div>
+
+      <div class="field" data-question="Styles or colors to avoid">
+        <label for="s5-avoid">Any styles, colors, or layouts you'd like to avoid?</label>
+        <textarea id="s5-avoid"></textarea>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="6. Technical details">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 06</p>
+      <h2>Technical details</h2>
+      <p class="section-note">The practical groundwork — domain, hosting, and any tools already in use.</p>
+
+      <div class="field" data-question="Own a domain name?">
+        <fieldset>
+          <legend>Do you already own a domain name?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s6-domain" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s6-domain" value="No"> No</label>
+          </div>
+          <input type="text" class="other-input" id="s6-domain-detail" placeholder="If yes: what is it?">
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Hosting status">
+        <fieldset>
+          <legend>Do you have hosting in place, or will you need that set up?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s6-hosting" value="I have hosting"> I have hosting</label>
+            <label class="option"><input type="radio" name="s6-hosting" value="I need hosting set up"> I need hosting set up</label>
+            <label class="option"><input type="radio" name="s6-hosting" value="Not sure"> Not sure</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Want to edit content yourself after launch?">
+        <fieldset>
+          <legend>After launch, do you want to be able to edit content yourself (text, photos, blog posts)?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s6-selfedit" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s6-selfedit" value="No, I'd rather you handle updates"> No, I'd rather you handle updates</label>
+            <label class="option"><input type="radio" name="s6-selfedit" value="Some of it"> Some of it</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Existing tools the site should connect to">
+        <fieldset>
+          <legend>Any tools you already use that the site should connect to?</legend>
+          <div class="options">
+            <label class="option"><input type="checkbox" name="s6-tools" value="Calendly or similar booking tool"> Calendly or similar booking tool</label>
+            <label class="option"><input type="checkbox" name="s6-tools" value="Mailchimp or similar email platform"> Mailchimp or similar email platform</label>
+            <label class="option"><input type="checkbox" name="s6-tools" value="Stripe or PayPal"> Stripe or PayPal</label>
+            <label class="option"><input type="checkbox" name="s6-tools" value="Instagram feed"> Instagram feed</label>
+            <label class="option"><input type="checkbox" name="s6-tools" value="Google Reviews"> Google Reviews</label>
+            <label class="option"><input type="checkbox" name="s6-tools" value="None yet"> None yet</label>
+          </div>
+          <input type="text" class="other-input" id="s6-tools-other" placeholder="Other — please specify">
+        </fieldset>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="7. Trust &amp; compliance">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 07</p>
+      <h2>Trust &amp; compliance</h2>
+      <p class="section-note">A few things specific to nutrition-related sites that are easy to forget until launch day.</p>
+
+      <div class="field" data-question="Need a medical or nutrition disclaimer?">
+        <fieldset>
+          <legend>Should the site include a medical or nutrition disclaimer?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s7-disclaimer" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s7-disclaimer" value="No"> No</label>
+            <label class="option"><input type="radio" name="s7-disclaimer" value="Not sure"> Not sure</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Need a privacy policy and terms of service?">
+        <fieldset>
+          <legend>Do you need a privacy policy and terms of service?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="s7-legal" value="Yes"> Yes</label>
+            <label class="option"><input type="radio" name="s7-legal" value="No"> No</label>
+            <label class="option"><input type="radio" name="s7-legal" value="Not sure"> Not sure</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field" data-question="Certifications, licenses, or affiliations to display prominently">
+        <label for="s7-creds-display">Are there certifications, licenses, or affiliations that must be displayed prominently — and where are you licensed to practice?</label>
+        <textarea id="s7-creds-display"></textarea>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="8. Budget &amp; timeline">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 08</p>
+      <h2>Budget &amp; timeline</h2>
+      <p class="section-note">Helps me scope something realistic for where you are right now.</p>
+
+      <div class="field" data-question="Budget range">
+        <label for="s8-budget">What's your budget range for this project?</label>
+        <input type="text" id="s8-budget">
+      </div>
+
+      <div class="field" data-question="Target launch date or event">
+        <label for="s8-date">Is there a date you'd like this live by? Tied to any event?</label>
+        <input type="text" id="s8-date">
+      </div>
+
+      <div class="field" data-question="Other time-sensitive details">
+        <label for="s8-other-dates">Anything else time-sensitive I should know?</label>
+        <textarea id="s8-other-dates"></textarea>
+      </div>
+    </section>
+
+    <section class="q-section" data-title="9. Anything else">
+      <hr class="section-rule">
+      <p class="eyebrow">Section 09</p>
+      <h2>Anything else</h2>
+      <p class="section-note">Anything about your business or your vision for this site that the questions above didn't cover.</p>
+
+      <div class="field" data-question="Anything else I should know?">
+        <label for="s9-other">Tell me anything else that would help</label>
+        <textarea id="s9-other" style="min-height:6rem;"></textarea>
+      </div>
+    </section>
+
+    <section class="review">
+      <hr class="section-rule" style="background:var(--beet);">
+      <p class="eyebrow" style="color:var(--turmeric);">Last step</p>
+      <h2 style="font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-weight:500; font-size:clamp(1.3rem,2.6vw,1.55rem); margin:0 0 0.5rem;">Review &amp; send your answers</h2>
+      <p class="section-note">Compile everything into a single record, then download it and email it back.</p>
+
+      <div class="actions">
+        <button type="button" id="compile-btn">Compile my answers</button>
+      </div>
+
+      <div id="review-output" hidden>
+        <label for="review-text" style="display:block; font-weight:600; margin-bottom:0.5rem;">Your answers</label>
+        <textarea id="review-text" readonly></textarea>
+
+        <div class="actions">
+          <button type="button" id="download-btn">Download as a text file</button>
+          <button type="button" class="secondary" id="copy-btn">Copy to clipboard</button>
+          <a id="mailto-link" href="#" class="secondary" style="display:inline-flex; align-items:center; padding:0.75rem 1.4rem; border:1px solid var(--rule); text-decoration:none; color:var(--ink); font-weight:600; font-size:0.95rem;">Open an email to send it</a>
+        </div>
+        <p class="status-msg" id="status-msg" role="status" aria-live="polite"></p>
+
+        <div class="hint-box">
+          <strong>How to get this back to me:</strong> download the file above and attach it to an email, or select all the text and paste it straight into an email — either way, send it to <strong>mrchreesa@gmail.com</strong>.
+        </div>
+      </div>
+    </section>
+
+  </form>
+
+  <footer>
+    Website discovery questionnaire — prepared for our project together.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.q-section'));
+
+    function getFieldValue(fieldEl) {
+      var parts = [];
+      var radios = fieldEl.querySelectorAll('input[type="radio"]');
+      var checks = fieldEl.querySelectorAll('input[type="checkbox"]');
+      var texts = fieldEl.querySelectorAll('input[type="text"], input[type="url"], textarea');
+
+      if (radios.length) {
+        var checked = fieldEl.querySelector('input[type="radio"]:checked');
+        if (checked) parts.push(checked.value);
+      }
+      if (checks.length) {
+        var checkedBoxes = Array.prototype.slice.call(fieldEl.querySelectorAll('input[type="checkbox"]:checked')).map(function (c) { return c.value; });
+        if (checkedBoxes.length) parts.push(checkedBoxes.join(', '));
+      }
+      Array.prototype.forEach.call(texts, function (t) {
+        if (t.value && t.value.trim()) parts.push(t.value.trim());
+      });
+      return parts.length ? parts.join(' — ') : null;
+    }
+
+    function slugify(str) {
+      return (str || 'answers').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'answers';
+    }
+
+    function compile() {
+      var bizName = document.getElementById('s1-bizname').value.trim() || '(business name not given)';
+      var today = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      var lines = [];
+      lines.push('WEBSITE DISCOVERY QUESTIONNAIRE');
+      lines.push('Completed ' + today + ' — ' + bizName);
+      lines.push('');
+
+      sections.forEach(function (sec) {
+        var title = sec.getAttribute('data-title').toUpperCase();
+        var rule = new Array(title.length + 1).join('-');
+        lines.push(rule);
+        lines.push(title);
+        lines.push(rule);
+        var fields = sec.querySelectorAll('.field');
+        Array.prototype.forEach.call(fields, function (f) {
+          var q = f.getAttribute('data-question');
+          var v = getFieldValue(f);
+          lines.push('Q: ' + q);
+          lines.push('A: ' + (v || '(not answered)'));
+          lines.push('');
+        });
+      });
+
+      return { text: lines.join('\n'), bizName: bizName };
+    }
+
+    var reviewOutput = document.getElementById('review-output');
+    var reviewText = document.getElementById('review-text');
+    var statusMsg = document.getElementById('status-msg');
+    var lastCompiled = null;
+
+    document.getElementById('compile-btn').addEventListener('click', function () {
+      lastCompiled = compile();
+      reviewText.value = lastCompiled.text;
+      reviewOutput.hidden = false;
+
+      var mailtoLink = document.getElementById('mailto-link');
+      var subject = encodeURIComponent('Website questionnaire — ' + lastCompiled.bizName);
+      var body = encodeURIComponent('Hi,\n\nI\'ve filled out the website questionnaire — my answers are attached (or pasted below).\n\n');
+      mailtoLink.href = 'mailto:mrchreesa@gmail.com?subject=' + subject + '&body=' + body;
+
+      reviewOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      statusMsg.textContent = '';
+    });
+
+    document.getElementById('download-btn').addEventListener('click', function () {
+      if (!lastCompiled) return;
+      try {
+        var filename = 'website-questionnaire-' + slugify(lastCompiled.bizName) + '.txt';
+        var blob = new Blob([lastCompiled.text], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        statusMsg.textContent = 'Downloaded. Attach that file to an email to mrchreesa@gmail.com.';
+      } catch (err) {
+        statusMsg.textContent = 'Couldn\'t download just now — please copy the text above into an email instead.';
+      }
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', function () {
+      if (!lastCompiled) return;
+      var done = function () { statusMsg.textContent = 'Copied. Paste it into an email to mrchreesa@gmail.com.'; };
+      var fail = function () {
+        reviewText.focus();
+        reviewText.select();
+        statusMsg.textContent = 'Text selected above — press Cmd/Ctrl+C to copy it.';
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(lastCompiled.text).then(done).catch(fail);
+      } else {
+        fail();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
