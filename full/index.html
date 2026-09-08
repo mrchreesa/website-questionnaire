@@ -139,6 +139,7 @@
 
   input[type="text"],
   input[type="url"],
+  input[type="email"],
   textarea {
     width: 100%;
     background: transparent;
@@ -160,6 +161,7 @@
 
   input[type="text"]:focus,
   input[type="url"]:focus,
+  input[type="email"]:focus,
   textarea:focus {
     outline: none;
     border-bottom: 2px solid var(--focus);
@@ -268,6 +270,25 @@
     margin-top: 1.2rem;
   }
   .hint-box strong { color: var(--beet); }
+
+  .req { color: var(--beet); font-weight: 700; }
+
+  .field.invalid input {
+    border-bottom: 2px solid var(--beet);
+    padding-bottom: calc(0.5rem - 1px);
+  }
+
+  button[disabled] { opacity: 0.5; cursor: default; }
+  button[disabled]:hover { background: var(--ink); }
+
+  .success-box {
+    background: var(--bone-raised);
+    border-left: 3px solid var(--turmeric);
+    padding: 1.1rem 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .success-title { font-weight: 700; color: var(--beet); margin: 0 0 0.35rem; }
+  .success-body { margin: 0; font-size: 0.94rem; color: var(--ink-soft); }
 
   footer {
     margin-top: 4rem;
@@ -652,26 +673,41 @@
     <section class="review">
       <hr class="section-rule" style="background:var(--beet);">
       <p class="eyebrow" style="color:var(--turmeric);">Last step</p>
-      <h2 style="font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-weight:500; font-size:clamp(1.3rem,2.6vw,1.55rem); margin:0 0 0.5rem;">Review &amp; send your answers</h2>
-      <p class="section-note">Compile everything into a single record, then download it and email it back.</p>
+      <h2 style="font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-weight:500; font-size:clamp(1.3rem,2.6vw,1.55rem); margin:0 0 0.5rem;">Send me your answers</h2>
+      <p class="section-note">Just so I know who this is from and where to reply.</p>
 
-      <div class="actions">
-        <button type="button" id="compile-btn">Compile my answers</button>
+      <div class="field" id="f-name">
+        <label for="sender-name">Your name <span class="req">*</span></label>
+        <input type="text" id="sender-name" autocomplete="name">
+      </div>
+
+      <div class="field" id="f-email">
+        <label for="sender-email">Your email <span class="req">*</span>
+          <span class="field-hint">I&#39;ll reply to this address.</span>
+        </label>
+        <input type="email" id="sender-email" autocomplete="email">
+      </div>
+
+      <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none !important;">
+
+      <div class="actions" id="send-actions">
+        <button type="button" id="send-btn">Send my answers</button>
+      </div>
+      <p class="status-msg" id="status-msg" role="status" aria-live="polite"></p>
+
+      <div class="success-box" id="success-box" hidden>
+        <p class="success-title">Thanks &mdash; I&#39;ve got your answers.</p>
+        <p class="success-body">They&#39;ve landed in my inbox and I&#39;ll be in touch shortly. You can close this page.</p>
       </div>
 
       <div id="review-output" hidden>
-        <label for="review-text" style="display:block; font-weight:600; margin-bottom:0.5rem;">Your answers</label>
-        <textarea id="review-text" readonly></textarea>
-
-        <div class="actions">
-          <button type="button" id="download-btn">Download as a text file</button>
-          <button type="button" class="secondary" id="copy-btn">Copy to clipboard</button>
-          <a id="mailto-link" href="#" class="secondary" style="display:inline-flex; align-items:center; padding:0.75rem 1.4rem; border:1px solid var(--rule); text-decoration:none; color:var(--ink); font-weight:600; font-size:0.95rem;">Open an email to send it</a>
+        <div class="hint-box" style="margin-top:0;">
+          <strong>That didn&#39;t send.</strong> Nothing is lost &mdash; copy the text below and email it to <strong>mrchreesa@gmail.com</strong> and I&#39;ll pick it up from there.
         </div>
-        <p class="status-msg" id="status-msg" role="status" aria-live="polite"></p>
-
-        <div class="hint-box">
-          <strong>How to get this back to me:</strong> download the file above and attach it to an email, or select all the text and paste it straight into an email — either way, send it to <strong>mrchreesa@gmail.com</strong>.
+        <label for="review-text" style="display:block; font-weight:600; margin:1.2rem 0 0.5rem;">Your answers</label>
+        <textarea id="review-text" readonly></textarea>
+        <div class="actions">
+          <button type="button" class="secondary" id="copy-btn">Copy to clipboard</button>
         </div>
       </div>
     </section>
@@ -685,6 +721,9 @@
 
 <script>
   (function () {
+    var ACCESS_KEY = 'fc211d1e-ddf2-401c-9204-3189ec2fa8d8';
+    var ENDPOINT = 'https://api.web3forms.com/submit';
+
     var sections = Array.prototype.slice.call(document.querySelectorAll('.q-section'));
 
     function getFieldValue(fieldEl) {
@@ -707,16 +746,15 @@
       return parts.length ? parts.join(' — ') : null;
     }
 
-    function slugify(str) {
-      return (str || 'answers').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'answers';
-    }
-
     function compile() {
       var bizName = document.getElementById('s1-bizname').value.trim() || '(business name not given)';
+      var senderName = document.getElementById('sender-name').value.trim();
+      var senderEmail = document.getElementById('sender-email').value.trim();
       var today = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
       var lines = [];
       lines.push('WEBSITE DISCOVERY QUESTIONNAIRE');
       lines.push('Completed ' + today + ' — ' + bizName);
+      lines.push('From: ' + senderName + ' <' + senderEmail + '>');
       lines.push('');
 
       sections.forEach(function (sec) {
@@ -735,49 +773,75 @@
         });
       });
 
-      return { text: lines.join('\n'), bizName: bizName };
+      return { text: lines.join('\n'), bizName: bizName, senderName: senderName, senderEmail: senderEmail };
     }
 
+    var sendBtn = document.getElementById('send-btn');
+    var sendActions = document.getElementById('send-actions');
+    var statusMsg = document.getElementById('status-msg');
+    var successBox = document.getElementById('success-box');
     var reviewOutput = document.getElementById('review-output');
     var reviewText = document.getElementById('review-text');
-    var statusMsg = document.getElementById('status-msg');
-    var lastCompiled = null;
 
-    document.getElementById('compile-btn').addEventListener('click', function () {
-      lastCompiled = compile();
-      reviewText.value = lastCompiled.text;
-      reviewOutput.hidden = false;
+    function setInvalid(wrapperId, bad) {
+      document.getElementById(wrapperId).classList[bad ? 'add' : 'remove']('invalid');
+    }
 
-      var mailtoLink = document.getElementById('mailto-link');
-      var subject = encodeURIComponent('Website questionnaire — ' + lastCompiled.bizName);
-      var body = encodeURIComponent('Hi,\n\nI\'ve filled out the website questionnaire — my answers are attached (or pasted below).\n\n');
-      mailtoLink.href = 'mailto:mrchreesa@gmail.com?subject=' + subject + '&body=' + body;
+    function validEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
 
-      reviewOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      statusMsg.textContent = '';
-    });
+    sendBtn.addEventListener('click', function () {
+      var name = document.getElementById('sender-name').value.trim();
+      var email = document.getElementById('sender-email').value.trim();
+      var nameBad = !name;
+      var emailBad = !validEmail(email);
 
-    document.getElementById('download-btn').addEventListener('click', function () {
-      if (!lastCompiled) return;
-      try {
-        var filename = 'website-questionnaire-' + slugify(lastCompiled.bizName) + '.txt';
-        var blob = new Blob([lastCompiled.text], { type: 'text/plain;charset=utf-8' });
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        statusMsg.textContent = 'Downloaded. Attach that file to an email to mrchreesa@gmail.com.';
-      } catch (err) {
-        statusMsg.textContent = 'Couldn\'t download just now — please copy the text above into an email instead.';
+      setInvalid('f-name', nameBad);
+      setInvalid('f-email', emailBad);
+
+      if (nameBad || emailBad) {
+        statusMsg.textContent = 'Please add your name and a valid email address so I can reply.';
+        return;
       }
+      if (document.getElementById('botcheck').checked) return;
+
+      var compiled = compile();
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending…';
+      statusMsg.textContent = '';
+      reviewOutput.hidden = true;
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: 'Website questionnaire — ' + compiled.bizName,
+          from_name: compiled.senderName,
+          replyto: compiled.senderEmail,
+          message: compiled.text
+        })
+      }).then(function (res) {
+        return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+      }).then(function (r) {
+        if (!r.ok || r.data.success === false) throw new Error('rejected');
+        sendActions.hidden = true;
+        successBox.hidden = false;
+        statusMsg.textContent = '';
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }).catch(function () {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Try sending again';
+        statusMsg.textContent = 'That did not go through — see below.';
+        reviewText.value = compiled.text;
+        reviewOutput.hidden = false;
+        reviewOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
 
     document.getElementById('copy-btn').addEventListener('click', function () {
-      if (!lastCompiled) return;
       var done = function () { statusMsg.textContent = 'Copied. Paste it into an email to mrchreesa@gmail.com.'; };
       var fail = function () {
         reviewText.focus();
@@ -785,7 +849,7 @@
         statusMsg.textContent = 'Text selected above — press Cmd/Ctrl+C to copy it.';
       };
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(lastCompiled.text).then(done).catch(fail);
+        navigator.clipboard.writeText(reviewText.value).then(done).catch(fail);
       } else {
         fail();
       }
